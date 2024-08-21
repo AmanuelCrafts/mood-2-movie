@@ -1,0 +1,75 @@
+@import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Rubik", sans-serif;
+  color: white;
+}
+
+/* From Uiverse.io by vinodjangid07 */
+.Btn {
+  padding: 15px 20px;
+  background-color: rgb(168, 38, 255);
+  color: white;
+  font-weight: 500;
+  font-size: large;
+  cursor: pointer;
+  border-radius: 10px;
+  box-shadow: 5px 5px 0px rgb(140, 32, 212);
+  transition-duration: 0.3s;
+}
+
+.Btn:hover {
+  transform: translate(3px, 3px);
+  transition-duration: 0.3s;
+  box-shadow: 2px 2px 0px rgb(140, 32, 212);
+}
+
+/* Responsive Styles */
+@media (max-width: 1200px) {
+  .Btn {
+    padding: 13px 18px;
+    font-size: medium;
+    box-shadow: 4px 4px 0px rgb(140, 32, 212);
+  }
+
+  .Btn:hover {
+    transform: translate(2px, 2px);
+    box-shadow: 1px 1px 0px rgb(140, 32, 212);
+  }
+}
+
+@media (max-width: 768px) {
+  .Btn {
+    padding: 10px 10px;
+    font-size: medium;
+    box-shadow: 3px 3px 0px rgb(140, 32, 212);
+  }
+
+  .Btn:hover {
+    transform: translate(2px, 2px);
+    box-shadow: 1px 1px 0px rgb(140, 32, 212);
+  }
+}
+
+@media (max-width: 480px) {
+  .Btn {
+    padding: 8px 10px;
+    font-size: small;
+    box-shadow: 2px 2px 0px rgb(140, 32, 212);
+  }
+
+  .Btn:hover {
+    transform: translate(1px, 1px);
+    box-shadow: 1px 1px 0px rgb(140, 32, 212);
+  }
+}
