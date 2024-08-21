@@ -11,7 +11,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/movies/:emotion" element={<MovieContainer />} />
+        <Route path="/movies/:emotion/:genre" element={<MovieContainer />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />

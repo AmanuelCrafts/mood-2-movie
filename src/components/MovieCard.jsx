@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 const MovieCard = ({ movie }) => {
-  const [trailerKey, setTrailerKey] = useState(null);
-  const [loadingTrailer, setLoadingTrailer] = useState(true);
-  const [error, setError] = useState(null);
+  const [trailerUrl, setTrailerUrl] = useState(null);
 
   useEffect(() => {
     const fetchTrailer = async () => {
@@ -13,22 +11,18 @@ const MovieCard = ({ movie }) => {
           `https://api.themoviedb.org/3/movie/${movie.id}/videos`,
           {
             params: {
-              api_key: "3509c41a130f93452b1dd8c5a1d4c1fb",
+              api_key: import.meta.env.VITE_API_KEY,
             },
           }
         );
-        const trailers = response.data.results.filter(
-          (video) => video.type === "Trailer" && video.site === "YouTube"
+        const trailer = response.data.results.find(
+          (video) => video.type === "Trailer"
         );
-        if (trailers.length > 0) {
-          setTrailerKey(trailers[0].key);
-        } else {
-          setError("Trailer not available.");
+        if (trailer) {
+          setTrailerUrl(trailer.key);
         }
       } catch (error) {
-        setError("Failed to fetch trailer.");
-      } finally {
-        setLoadingTrailer(false);
+        console.error("Failed to fetch trailer:", error);
       }
     };
 
@@ -36,38 +30,35 @@ const MovieCard = ({ movie }) => {
   }, [movie.id]);
 
   return (
-    <div className="max-w-xl bg-[#272935] shadow-lg rounded-xl overflow-hidden my-10">
-      <div className="relative pb-[56.25%] h-0 overflow-hidden">
-        {loadingTrailer ? (
-          <p className="text-center text-gray-500 py-4">Loading trailer...</p>
-        ) : error ? (
-          <p className="text-center text-red-500 py-4">{error}</p>
-        ) : trailerKey ? (
+    <div className="max-w-lg bg-[#272935] shadow-lg rounded-lg overflow-hidden my-5">
+      <div className="relative pb-[56.25%] overflow-hidden">
+        {trailerUrl ? (
           <iframe
-            className="absolute top-0 left-0 w-full h-full"
-            src={`https://www.youtube.com/embed/${trailerKey}?autoplay=1&mute=1`}
+            src={`https://www.youtube.com/embed/${trailerUrl}?autoplay=1`}
             title={movie.title}
+            className="absolute top-0 left-0 w-full h-full"
             frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allow="autoplay; encrypted-media"
             allowFullScreen
-          ></iframe>
+          />
         ) : (
-          <p className="text-center text-gray-500 py-4">No trailer available</p>
+          <img
+            src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+            alt={movie.title}
+            className="absolute top-0 left-0 w-full h-full object-cover"
+          />
         )}
       </div>
-      <div className="p-8">
-        <h2 className="text-3xl font-bold mb-4 text-white">{movie.title}</h2>
-        <p className="text-gray-400 mb-2">
+      <div className="p-6">
+        <h2 className="text-2xl font-bold mb-2 text-white">{movie.title}</h2>
+        <p className="text-gray-400 mb-1">
           <strong>Release Date:</strong> {movie.release_date}
         </p>
-        <p className="text-gray-400 mb-2">
-          <strong>Rating:</strong> {movie.vote_average}
-        </p>
         <p
-          className="text-gray-300 text-base mt-3 overflow-hidden overflow-ellipsis"
+          className="text-gray-300 text-sm mt-3 overflow-hidden overflow-ellipsis"
           style={{
             display: "-webkit-box",
-            WebkitLineClamp: 4,
+            WebkitLineClamp: 3,
             WebkitBoxOrient: "vertical",
           }}
         >

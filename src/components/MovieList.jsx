@@ -4,12 +4,10 @@ import MovieCard from "./MovieCard";
 const MovieList = ({ movieList, currentIndex, onNext, onPrevious }) => {
   return (
     <div className="flex flex-col items-center">
-      <div className="gap-6">
-        <MovieCard
-          key={movieList[currentIndex].id}
-          movie={movieList[currentIndex]}
-        />
-      </div>
+      <MovieCard
+        key={movieList[currentIndex].id}
+        movie={movieList[currentIndex]}
+      />
       <div className="flex justify-between w-full max-w-md mt-4">
         <button
           onClick={onPrevious}
