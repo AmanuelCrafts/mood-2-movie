@@ -50,6 +50,7 @@ const MovieContainer = () => {
         );
         setMovieList(response.data.results);
       } catch (error) {
+        console.log(error);
         setError("Failed to fetch movies. Please try again later.");
       } finally {
         setLoading(false);
@@ -87,8 +88,8 @@ const MovieContainer = () => {
         />
       ) : (
         <p className="px-4">
-          We couldn't find any movies for the emotion: {emotion}. Try another
-          mood.
+          We couldn&apos;t find any movies for the emotion: {emotion}. Try
+          another mood.
         </p>
       )}
     </div>

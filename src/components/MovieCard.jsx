@@ -30,13 +30,13 @@ const MovieCard = ({ movie }) => {
   }, [movie.id]);
 
   return (
-    <div className="max-w-lg bg-[#272935] shadow-lg rounded-lg overflow-hidden my-5">
-      <div className="relative pb-[56.25%] overflow-hidden">
+    <div className="max-w-lg bg-[#272935] shadow-xl rounded-lg overflow-hidden my-5 hover:shadow-2xl transition-shadow duration-300 ease-in-out h-full">
+      <div className="relative pb-[56.25%] overflow-hidden rounded-t-lg">
         {trailerUrl ? (
           <iframe
             src={`https://www.youtube.com/embed/${trailerUrl}?autoplay=1`}
             title={movie.title}
-            className="absolute top-0 left-0 w-full h-full"
+            className="absolute top-0 left-0 w-full h-full object-cover rounded-t-lg"
             frameBorder="0"
             allow="autoplay; encrypted-media"
             allowFullScreen
@@ -45,23 +45,18 @@ const MovieCard = ({ movie }) => {
           <img
             src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
             alt={movie.title}
-            className="absolute top-0 left-0 w-full h-full object-cover"
+            className="absolute top-0 left-0 w-full h-full object-cover rounded-t-lg"
           />
         )}
       </div>
-      <div className="p-6">
-        <h2 className="text-2xl font-bold mb-2 text-white">{movie.title}</h2>
-        <p className="text-gray-400 mb-1">
+      <div className="p-6 h-48">
+        <h2 className="text-2xl font-semibold text-white mb-3">
+          {movie.title}
+        </h2>
+        <p className="text-gray-400 text-sm mb-2">
           <strong>Release Date:</strong> {movie.release_date}
         </p>
-        <p
-          className="text-gray-300 text-sm mt-3 overflow-hidden overflow-ellipsis"
-          style={{
-            display: "-webkit-box",
-            WebkitLineClamp: 3,
-            WebkitBoxOrient: "vertical",
-          }}
-        >
+        <p className="text-gray-300 text-sm mt-3 line-clamp-3">
           {movie.overview}
         </p>
       </div>
